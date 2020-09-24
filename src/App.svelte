@@ -9,6 +9,9 @@
 	import HomeBL from "./Pages/BeforeLogin/Home.svelte";
 	import RegisterBL from "./Pages/BeforeLogin/Register.svelte";
 	import Dashboard from "./Pages/AfterLogin/Dashboard.svelte"
+	import Article from "./Pages/AfterLogin/Articles.svelte";
+	import Video from "./Pages/AfterLogin/Videos.svelte";
+	import ArticleDetail from "./Pages/AfterLogin/ArticleDetail.svelte";
 	toast.configure({
 		position: "top-left"
 	});
@@ -20,6 +23,7 @@
 <Router url="{url}">
 	<svelte:component this="{Menus}"/>
 	<style>
+
 		.pull-right {
 			float: right;
 		}
@@ -64,6 +68,11 @@
 		<Route path="/" component="{HomeBL}" />
 		<Route path="register" component="{RegisterBL}" />
 		<Route path="home" component="{Dashboard}" />
+		<Route path="artikel" component="{Article}" />
+		<Route path="video" component="{Video}" />
+		<Route path="artikel/:id" component="{ArticleDetail}" let:params>
+			<ArticleDetail id="params.id" />
+		</Route>
 	</div>
 	<ToastContainer />
 

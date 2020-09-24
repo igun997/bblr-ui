@@ -34,6 +34,11 @@ console.log(login)
         width: 50px;
         height: 50px;
     }
+    .nav-item {
+        margin-right: 90%;
+        font-size: 16px;
+    }
+
 </style>
 <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bblr-color">
     {#if (login === 0)}
@@ -51,6 +56,36 @@ console.log(login)
         </ul>
     </div>
     {:else}
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/home"  type="button"  >
+                    <Icon icon="{faHome}" />
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/artikel" type="button"  >
+                    <Icon icon="{faNewspaper}" />
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/video"  type="button"  >
+                    <Icon icon="{faVideo}" />
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="/alarm"  type="button"  >
+                    <Icon icon="{faBell}" />
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " on:click={logOut} type="button"  >
+                    <Icon icon="{faSignOutAlt}" />
+                </a>
+            </li>
+
+        </ul>
+    </div>
     <a class="navbar-toggler" href="/home"  type="button"  >
         <Icon icon="{faHome}" />
     </a>

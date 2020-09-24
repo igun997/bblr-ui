@@ -1,6 +1,7 @@
 <script>
     import { scaleLinear } from 'd3-scale';
     import points from '../../Components/Seeds/Dashboard';
+    import {navigate} from "svelte-routing";
     //Chart Section
     const yTicks = [0, 2, 4, 6, 8];
     const xTicks = [1980, 1990, 2000, 2010];
@@ -44,6 +45,9 @@
         })
         const json = await res.json();
         myChild = json.detail;
+    }
+    function toBBLR() {
+        navigate("bblr",{replace:true});
     }
     loadChild();
 </script>
@@ -107,6 +111,9 @@
         margin-bottom: 30px;
     }
 </style>
+<svelte:head>
+    <title>Dashboard</title>
+</svelte:head>
 <div class="row" id="dashboard_layout">
     <div class="col-12 gap_card" style="padding: 0px 0px 0px">
         <div class="card">
@@ -157,7 +164,7 @@
                    </div>
                    <div class="col-12">
                        <hr>
-                       <a href="bblr" class="btn btn-bblr btn-lg float-right">Data Anak</a>
+                       <button type="button" on:click={toBBLR} class="btn btn-bblr btn-lg float-right">Data Anak</button>
 
                    </div>
                </div>

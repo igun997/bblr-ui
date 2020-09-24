@@ -4,7 +4,17 @@
     const seed = ArticleDetail;
 
     let detail = null;
-
+    async function loadArticle() {
+        const res = await fetch(ps.env.endpoint+"articles/"+id, {
+            method: "GET",
+            headers: {
+                'Accept-Type': "application/json"
+            }
+        })
+        const json = await res.json();
+        detail = json;
+    }
+    loadArticle();
     if (detail === null){
         detail = seed;
     }
@@ -38,7 +48,7 @@
         <h4 class="title">{detail.title}</h4>
         <hr>
         <div class="card-text sub_title">
-            {@html detail.long_desc}
+            {@html detail.content}
         </div>
     </div>
 </div>

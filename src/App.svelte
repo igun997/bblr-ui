@@ -11,6 +11,7 @@
 	import Dashboard from "./Pages/AfterLogin/Dashboard.svelte"
 	import Article from "./Pages/AfterLogin/Articles.svelte";
 	import Video from "./Pages/AfterLogin/Videos.svelte";
+	import Alarm from "./Pages/AfterLogin/Alarm.svelte";
 	import ArticleDetail from "./Pages/AfterLogin/ArticleDetail.svelte";
 	toast.configure({
 		position: "top-left"
@@ -70,6 +71,7 @@
 		<Route path="home" component="{Dashboard}" />
 		<Route path="artikel" component="{Article}" />
 		<Route path="video" component="{Video}" />
+		<Route path="alarm" component="{Alarm}" />
 		<Route path="artikel/:id" component="{ArticleDetail}" let:params>
 			<ArticleDetail id="params.id" />
 		</Route>

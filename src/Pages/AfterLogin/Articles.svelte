@@ -4,7 +4,20 @@
     import Articles from "../../Components/Seeds/Articles";
     const seed = Articles;
     let article_list = [];
-
+    async function loadArticle() {
+        const res = await fetch(ps.env.endpoint+"articles", {
+            method: "GET",
+            headers: {
+                'Accept-Type': "application/json"
+            }
+        })
+        const json = await res.json();
+        article_list = json._embedded.articles.map(n => {
+            n.time = "00:00";
+            return n;
+        });
+    }
+    loadArticle()
     import {navigate} from "svelte-routing";
     function detail(id) {
         navigate("artikel/"+id,{replace:true});
@@ -62,7 +75,7 @@
                             </p>
                         </div>
                         <div class="col-3">
-                            <p class="time sub_title">{item.time} <Icon icon="{faBookmark}" /></p>
+                            <p class="time sub_title"><Icon icon="{faBookmark}" /></p>
                         </div>
                     </div>
                 </div>

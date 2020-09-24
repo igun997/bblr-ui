@@ -4,7 +4,21 @@
     import Video from "../../Components/Seeds/Video";
     const seed = Video;
     let video_list = [];
-
+    async function loadVideo() {
+        const res = await fetch(ps.env.endpoint+"videos", {
+            method: "GET",
+            headers: {
+                'Accept-Type': "application/json"
+            }
+        })
+        const json = await res.json();
+        video_list = json._embedded.videos.map(n => {
+            const parse = n.url_yt.split("=");
+            n.img = "https://img.youtube.com/vi/"+parse[1]+"/0.jpg";
+            return n;
+        });
+    }
+    loadVideo()
     import {navigate} from "svelte-routing";
 
     if (video_list.length === 0){
@@ -46,7 +60,7 @@
 <div class="row" id="article_layout">
     {#each video_list as item,i}
         <div class="col-12 gap">
-            <a href="{item.link}" target="_blank">
+            <a href="{item.url_yt}" target="_blank">
                 <div class="card " >
                     <div class="card-body">
                         <div class="row">

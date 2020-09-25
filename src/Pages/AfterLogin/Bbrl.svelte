@@ -11,7 +11,7 @@
         color: white !important;
     }
     .card {
-        margin-top: 70px !important;
+        margin-top: 10px !important;
     }
     .eye {
         color: #0e9aa7;
@@ -38,6 +38,26 @@
 <script>
     import Fa from "svelte-fa";
     import { faPlus,faEye } from '@fortawesome/free-solid-svg-icons';
+    import {toast} from "svelte-toastify";
+    import {navigate} from "svelte-routing";
+    let babies = [];
+    async function getData() {
+        const res = await fetch(ps.env.endpoint+"babies", {
+            method: 'GET',
+            headers: {
+                'Accept-Type': 'application/json'
+            }
+        })
+
+        const json = await res.json()
+
+        console.log(json);
+        if (json._embedded.babies[0].id !== undefined){
+            babies = json._embedded.babies;
+        }
+    }
+    getData();
+
 </script>
 
 <div class="row">
@@ -46,6 +66,7 @@
             <Fa icon="{faPlus}" size="sm" />
         </a>
     </div>
+    {#each babies as baby,i}
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -56,15 +77,16 @@
                         </div>
                     </div>
                     <div class="col-9">
-                        <h5 class="title">Nama Anak</h5>
+                        <h5 class="title">{baby.name}</h5>
                         <p class="card-text sub_title">
-                            desc
+                            -
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    {/each}
 
 
 </div>

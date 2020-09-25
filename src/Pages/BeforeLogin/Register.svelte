@@ -70,7 +70,7 @@
 </style>
 <div class="row" id="register_layout">
     <div class="col-12">
-        <img src="//via.placeholder.com/150" alt="">
+        <img src="{ps.env.logo}" alt="">
     </div>
     <div class="col-12">
         <div class="form-group">

@@ -42,6 +42,7 @@ async function loginOn () {
     }
     #home_layout {
         margin-top: 30%;
+        margin-bottom: 20px;
     }
     .form-group {
         margin: 27px 20px 20px
@@ -49,7 +50,7 @@ async function loginOn () {
 </style>
 <div class="row" id="home_layout">
     <div class="col-12">
-        <img src="//via.placeholder.com/150" alt="">
+        <img src="{ps.env.logo}" alt="">
     </div>
     <div class="col-12">
         <div class="form-group">

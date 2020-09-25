@@ -26,6 +26,7 @@
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "sirv-cli": "^1.0.0",
+    "svelte-fa": "^2.1.1",
     "svelte-routing": "^1.4.2",
     "svelte-toastify": "0.0.27"
   }

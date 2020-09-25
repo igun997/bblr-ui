@@ -12,6 +12,13 @@
 	import Article from "./Pages/AfterLogin/Articles.svelte";
 	import Video from "./Pages/AfterLogin/Videos.svelte";
 	import Alarm from "./Pages/AfterLogin/Alarm.svelte";
+
+	import Bbrl from "./Pages/AfterLogin/Bbrl.svelte";
+	import BblrDetail from "./Pages/AfterLogin/BblrDetail.svelte";
+	import BblrNutrition from "./Pages/AfterLogin/BblrNutrition.svelte";
+	import BblrGrowth from "./Pages/AfterLogin/BblrGrowth.svelte";
+	import BblrForm from "./Pages/AfterLogin/BblrForm.svelte";
+
 	import ArticleDetail from "./Pages/AfterLogin/ArticleDetail.svelte";
 	toast.configure({
 		position: "top-left"
@@ -72,6 +79,24 @@
 		<Route path="artikel" component="{Article}" />
 		<Route path="video" component="{Video}" />
 		<Route path="alarm" component="{Alarm}" />
+		<Route path="bblr" component="{Bbrl}" />
+
+		<Route path="bblr/:id/detail" component="{BblrDetail}" let:params>
+			<BblrDetail id="params.id" />
+		</Route>
+		<Route path="bblr/add" component="{BblrForm}" />
+		<Route path="bblr/:id/edit" component="{BblrForm}" let:params>
+			<BblrForm id="params.id" />
+		</Route>
+
+		<Route path="bblr/:id/growth" component="{BblrGrowth}" let:params>
+			<BblrGrowth id="params.id" />
+		</Route>
+
+		<Route path="bblr/:id/nutrition" component="{BblrNutrition}" let:params>
+			<BblrNutrition id="params.id" />
+		</Route>
+
 		<Route path="artikel/:id" component="{ArticleDetail}" let:params>
 			<ArticleDetail id="params.id" />
 		</Route>

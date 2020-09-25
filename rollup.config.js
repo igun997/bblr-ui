@@ -44,6 +44,7 @@ export default {
 			ps: JSON.stringify({
 				env: {
 					endpoint: "https://api.maugini.in/",
+					logo : "/images/logo.png"
 				}
 			}),
 		}),

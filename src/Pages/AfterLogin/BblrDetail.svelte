@@ -12,6 +12,7 @@
     import { faEye } from '@fortawesome/free-solid-svg-icons';
     import {navigate} from "svelte-routing";
     console.log(id)
+    let isVisible = true;
     function comingSoon() {
         toast.info("Under Construct Dude");
     }
@@ -30,6 +31,16 @@
         if (resp.status === 200){
             loaded.feed = resp.detail.feeds;
             loaded.growth = resp.detail.growth;
+            if (resp.detail.growth.length > 0){
+                const last = resp.detail.growth[(resp.detail.growth.length - 1)];
+                const date1 = new Date(last.created_at);
+                const date2 = new Date();
+                const diffTime = Math.abs(date2 - date1);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                if (diffDays > 6){
+                    isVisible = false;
+                }
+            }
         }else {
             toast.info("Invalid Get Detail")
         }
@@ -56,7 +67,9 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="/bblr/{id}/nutrition">Nutrisi</a>
-                <a class="dropdown-item" href="/bblr/{id}/growth">Pertumbuhan</a>
+                {#if isVisible}
+                <a class="dropdown-item"  href="/bblr/{id}/growth">Pertumbuhan</a>
+                {/if}
             </div>
         </div>
     </div>

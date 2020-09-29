@@ -137,24 +137,32 @@
     .margin-center {
         margin-top: 20%;
     }
+    .gap {
+        margin-top: 10px;
+    }
     .margin-bottom {
         margin-bottom: 100px;
     }
 </style>
 <div class="row margin-bottom">
     <div class="col-12 margin-center">
-        <div class="form-group">
-            <label for="setDate">Tanggal Perekaman</label>
-            <input type="date" id="setDate" bind:value={dform.record_date} placeholder="Tanggal Perekaman" class="form-control">
+        <a href="/bblr/{id}/detail" class="btn btn-bblr float-left">
+            Kembali
+        </a>
+    </div>
+    {#if (viewValue === null)}
+        <div class="col-12 gap">
+            <div class="form-group">
+                <label for="setDate">Tanggal Perekaman</label>
+                <input type="date" id="setDate" bind:value={dform.record_date} placeholder="Tanggal Perekaman" class="form-control">
+            </div>
         </div>
-    </div>
-    <div class="col-12">
-        <h5 style="font-size: 15px">Metode</h5>
-        <hr/>
-    </div>
+        <div class="col-12">
+            <h5 style="font-size: 15px">Metode</h5>
+            <hr/>
+        </div>
 
-    {#if !isView}
-    <div class="col-6">
+        <div class="col-6">
         {#each selectedList as option_item,i}
 
             <Toggle type='radio' bind:group={dform.feed_from} value={option_item.id} let:checked={checked}>
@@ -239,5 +247,50 @@
             <button class="btn btn-bblr btn-block" on:click={submitAction} type="button">Simpan Data</button>
         </div>
     </div>
+    {:else}
+
+        <div class="col-12 gap">
+            <label for="tgl">Tanggal Perekaman</label>
+            <input type="text" class="form-control" disabled bind:value={viewValue.record_date}>
+        </div>
+        <div class="col-6 gap">
+            <label for="tgl">Method</label>
+            <input type="text" class="form-control" disabled value="Oral">
+        </div>
+        <div class="col-6 gap">
+            <label for="tgl">Type</label>
+            {#if (viewValue.feed_from === 1)}
+            <input type="text" class="form-control" disabled value="Payudara">
+            {:else if (viewValue.feed_from === 2)}
+                <input type="text" class="form-control" disabled value="Gelas">
+            {:else if (viewValue.feed_from === 3)}
+                <input type="text" class="form-control" disabled value="Botol">
+            {/if}
+        </div>
+        {#if (viewValue.feed_from === 1)}
+        <div class="col-12 gap">
+            <label>Lama Menyusui ({(viewValue.breast_left_long > 0)?"Payudara Kiri":"Payudara Kanan"})</label>
+            {#if (viewValue.breast_left_long > 0)}
+            <input type="text" class="form-control" disabled value="{viewValue.breast_left_long+" Menit"}">
+            {:else}
+            <input type="text" class="form-control" disabled value="{viewValue.breast_right_long+" Menit"}">
+            {/if}
+        </div>
+        {/if}
+
+        <div class="col-6 gap">
+            <label>Bayi Bersendawa ? <br><b>{(viewValue.is_brought_wind)?"Ya":"Tidak"}</b></label>
+            <label>Popok Bayi Diganti ? <br><b>{(viewValue.is_nappy_changed)?"Ya":"Tidak"}</b></label>
+            {#if (viewValue.is_nappy_changed)}
+                <label>Kondisi Popok ? <br><b>{(viewValue.is_soiled_nappy)?"Buang Air Besar":"Buang Air Kecil"}</b></label>
+            {/if}
+        </div>
+        <div class="col-6 gap">
+            {#if (viewValue.feed_from !== 1)}
+            <label>Waktu Minum <br><b>{viewValue.feed_min} Menit</b></label>
+            <label>Jumlah Diberikan <br><b>{viewValue.amount_offer} CC</b></label>
+            <label>Jumlah Dihabiskan <br><b>{viewValue.amount_taken} CC</b></label>
+            {/if}
+        </div>
     {/if}
 </div>

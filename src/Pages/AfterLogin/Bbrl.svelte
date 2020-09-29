@@ -41,22 +41,29 @@
     import {toast} from "svelte-toastify";
     import {navigate} from "svelte-routing";
     let babies = [];
-    async function getData() {
-        const res = await fetch(ps.env.endpoint+"babies", {
-            method: 'GET',
+    const myIdentity = JSON.parse(localStorage.getItem("fullIdentity"));
+    let myName = myIdentity.name;
+    const request = {
+        type:"GET",
+        content_type:"application/json",
+        endpoint:ps.env.endpoint+"dash?type=1&user_id="+myIdentity.id
+    }
+
+    async function loadChild() {
+        const res = await fetch(request.endpoint, {
+            method: request.type,
             headers: {
-                'Accept-Type': 'application/json'
+                'Accept-Type': request.content_type
             }
         })
-
-        const json = await res.json()
-
-        console.log(json);
-        if (json._embedded.babies[0].id !== undefined){
-            babies = json._embedded.babies;
-        }
+        const json = await res.json();
+        babies = json.detail;
     }
-    getData();
+    loadChild()
+
+    function detail(id) {
+        navigate("/bblr/"+id+"/detail",{replace:false});
+    }
 
 </script>
 
@@ -72,15 +79,12 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-3">
-                        <div class="eye">
+                        <div class="eye" on:click={detail(baby.id)}>
                             <Fa icon="{faEye}" size="2x"/>
                         </div>
                     </div>
                     <div class="col-9">
                         <h5 class="title">{baby.name}</h5>
-                        <p class="card-text sub_title">
-                            -
-                        </p>
                     </div>
                 </div>
             </div>

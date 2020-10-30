@@ -42,7 +42,7 @@
 </style>
 <div class="row" id="article_detail_layout">
     <div class="col-12 img-position">
-        <img src="{ps.env.api+detail.img}" class="img-fluid" alt="">
+        <img src="{ps.env.image+detail.img}" class="img-fluid" alt="">
     </div>
     <div class="col-12 img-position gap">
         <h4 class="title">{detail.title}</h4>

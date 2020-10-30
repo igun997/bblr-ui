@@ -66,7 +66,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-3">
-                            <img src="{ps.env.api+item.img}" class="img-fluid" alt="">
+                            <img src="{ps.env.image+item.img}" class="img-fluid" alt="">
                         </div>
                         <div class="col-6">
                             <h5 class="title">{item.title}</h5>

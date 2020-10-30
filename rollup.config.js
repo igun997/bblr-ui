@@ -43,7 +43,7 @@ export default {
 			// 2 level deep object should be stringify
 			ps: JSON.stringify({
 				env: {
-					endpoint: "https://api.maugini.in/",
+					endpoint: "https://dewi-temp.maugini.in/",
 					logo : "/images/logo.png"
 				}
 			}),
